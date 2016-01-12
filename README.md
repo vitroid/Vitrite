@@ -25,6 +25,7 @@
 ##Requirements
 * Python 3
 * NetworkX (a graph theory library for Python)
+
 ##Usage
 Input data must be in <a href="http://theochem.chem.okayama-u.ac.jp/wiki/wiki.cgi/matto?page=%40RNGS">@RNGS</a> format. Output data will be in <a href="http://theochem.chem.okayama-u.ac.jp/wiki/wiki.cgi/matto?page=%40RSET">@RSET</a> format.
 
