@@ -27,6 +27,8 @@ Input data must be in <a href="http://theochem.chem.okayama-u.ac.jp/wiki/wiki.cg
 
     % ./polyhed.py < test.rngs > test.rset
 
+Note that Perl version (polyhed.pl) is now outdated.  Future supports
+and updates will be made to the Python version (polyhed.py).
 ##Sample
 The following is the expression of a cubic graph, which should have
 six 4-cycles and a polyhedron.
