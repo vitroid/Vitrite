@@ -21,6 +21,7 @@
 	1. The polyhedron must not divide the original graph into two or
        more compositions.
 1. Repeat 1 .. 6 until all the pairs of rings are consulted.
+
 ##Requirements
 * Python 3
 * NetworkX (a graph theory library for Python)
