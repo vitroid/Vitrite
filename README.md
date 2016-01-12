@@ -10,14 +10,14 @@
 
 1. Choose 2 adjacent (i.e. edge-sharing) rings in the original graph.  We
    call this set of rings "faces".
-1. Define the perimeter oF the faces.
+1. Define the perimeter of the faces.
 1. Choose one of the ring that shares three successive vertices (two successive edges) with the perimeter.
 1. Add the ring to the faces, and extend the perimeter.
 1. Repeat 1 .. 4 until the perimeter closes.  Now we get a polyhedron.
 1. Exclude the polyhedron if any following test is not satisfied.
     1. Re-count the number of vertices, edges, and rings included in
        the polyhedron.  They must satisfy the Euler's characteristics:
-       f-e+v=1.
+       f-e+v=2.
 	1. The polyhedron must not divide the original graph into two or
        more compositions.
 1. Repeat 1 .. 6 until all the pairs of rings are consulted.
