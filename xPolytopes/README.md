@@ -44,3 +44,5 @@ That is, you get the ingredients of the xPolytopes.
 9) Render the povray file.
 
     povray +w1000 +h1000 +FN     +Q9  +A0.3 +AM2   +D -Lbin -L/include +HIview.inc -isample.48.pov -Osample.48.sq1.png
+
+Please consult the software for details.
