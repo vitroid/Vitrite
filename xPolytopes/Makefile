@@ -6,7 +6,7 @@ all: sample.ngph sample.rngs sample.67.rngs sample.48.rset sample.48.rset.ngph s
 
 #Lookup rings in the network (max. 7-membered)
 %.rngs: %.ngph
-	$(COUNTRINGS)/countrings.py 7 < $< > $@
+	./countrings.py 7 < $< > $@
 #Filter 6- or 7-membered rings only
 %.67.rngs: %.rngs
 	awk '(NF==1)||($$1==6)||($$1==7){print}' $< > $@
@@ -41,7 +41,7 @@ all: sample.ngph sample.rngs sample.67.rngs sample.48.rset sample.48.rset.ngph s
 
 #prepare scripts(private)
 TRAJTOOLS=~/github/TrajTools
-prepare: rset2ngph.pl fragmentchirality.py rset2yap.py rsetadjacency.py
+prepare: rset2ngph.pl fragmentchirality.py rset2yap.py rsetadjacency.py countrings.py
 fragmentchirality.py: ../tools/fragmentchirality.py
 	ln -s $<
 rset2ngph.pl: ../tools/rset2ngph.pl
@@ -50,7 +50,7 @@ rset2yap.py: ../tools/rset2yap.py
 	ln -s $<
 rsetadjacency.py: ../tools/rsetadjacency.py
 	ln -s $<
-%.py: $(TRAJTOOLS)/%.py
+%.py: $(COUNTRINGS)/%.py
 	cp $< .
-%.pl: $(TRAJTOOLS)/%.pl
-	cp $< .
+#%.pl: $(TRAJTOOLS)/%.pl
+#	cp $< .
