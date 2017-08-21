@@ -1,12 +1,12 @@
-#Exhaustive Search for Polyhedral Fragments (Vitrites)
-##Counting policy
+# Exhaustive Search for Polyhedral Fragments (Vitrites)
+## Counting policy
 
 * The program looks up all the "polyhedral fragments"
   (a.k.a. vitrites) in the given random almost 4-connected undirected graph.
 * It counts the fragments purely topologically. It does not use geometrical information.
 * Edge direction is not considered. (Undirected graph)
 
-##Algorithm
+## Algorithm
 
 1. Choose 2 adjacent (i.e. edge-sharing) rings in the original graph.  We
    call this set of rings "faces".
@@ -22,33 +22,34 @@
        more compositions.
 1. Repeat 1 .. 6 until all the pairs of rings are consulted.
 
-##Requirements
+## Requirements
+
 * Python 3
 * NetworkX (a graph theory library for Python)
 * A ring statistics algorithm (See https://github.com/vitroid/CountRings)
 
-##Usage
+## Usage
 Input data must be in <a href="http://theochem.chem.okayama-u.ac.jp/wiki/wiki.cgi/matto?page=%40RNGS">@RNGS</a> format (which is an output of the ring statistics algorithm [https://github.com/vitroid/CountRings]). Output data will be in <a href="http://theochem.chem.okayama-u.ac.jp/wiki/wiki.cgi/matto?page=%40RSET">@RSET</a> format.
 
     % ./polyhed.py < test.rngs > test.rset
 
 Note that Perl version (polyhed.pl) is now outdated.  Future supports
 and updates will be made to the Python version (polyhed.py).
-##Sample
+## Sample
 The following is the expression of a cubic graph, which should have
 six 4-cycles and a polyhedron.
 
     @RNGS
     8
     4 0 1 2 3
-	4 0 1 5 4
-	4 1 2 6 5
-	4 2 3 7 6
-	4 3 0 4 7
-	4 4 5 6 7
-	0
+    4 0 1 5 4
+    4 1 2 6 5
+    4 2 3 7 6
+    4 3 0 4 7
+    4 4 5 6 7
+    0
 
-##Known Problems
+## Known Problems
 The current definition of the rings depends on the context; that is,
 if you cut out a polyhedral subgraph out of a large graph, the number
 of rings in the subgraph is not always same as the number of rings at
