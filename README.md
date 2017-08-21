@@ -57,3 +57,7 @@ the correspoding part of the large graph.
 It happens because there might be a shortcut on the large graph that
 prevents counting a ring in the subgraph.
 (I will put here an illustration.)
+
+## To Cite It
+
+* M. Matsumoto, A. Baba, and I. Ohmine, Topological building blocks of hydrogen bond network in water, J. Chem. Phys. 127, 134504 (2007); doi:10.1063/1.2772627
