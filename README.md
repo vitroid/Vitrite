@@ -31,7 +31,7 @@
 ## Usage
 Input data must be in <a href="http://theochem.chem.okayama-u.ac.jp/wiki/wiki.cgi/matto?page=%40RNGS">@RNGS</a> format (which is an output of the ring statistics algorithm https://github.com/vitroid/CountRings ). Output data will be in <a href="http://theochem.chem.okayama-u.ac.jp/wiki/wiki.cgi/matto?page=%40RSET">@RSET</a> format.
 
-    % ./polyhed.py < test.rngs > test.rset
+    % ./polyhed.py < cube.rngs > cube.rset
 
 Note that Perl version (`polyhed.pl`) is now outdated.  Future supports
 and updates will be made to the Python version (`polyhed.py`).
