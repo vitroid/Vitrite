@@ -49,6 +49,22 @@ six 4-cycles and a polyhedron.
     4 4 5 6 7
     0
 
+Processing this file by polyhed.py will generate the following output:
+
+    % ./polyhed.py < cube.rngs
+    @FSEP
+    @RSET
+    6
+    6 0 1 2 3 4 5
+    0
+
+It indicates that
+
+1. @RSET is a format descriptor.
+2. There are 6 rings in the input file.
+3. There is one polyhedron consisting of 6 rings whose IDs are {0,1,2,3,4,5}.
+4. A zero for a terminator.
+
 ## Known Problems
 The current definition of the rings depends on the context; that is,
 if you cut out a polyhedral subgraph out of a large graph, the number
