@@ -60,6 +60,7 @@ Processing this file by polyhed.py will generate the following output:
 
 It indicates that
 
+0. (@FSEP is a field separator and has no meaning here.)
 1. @RSET is a format descriptor.
 2. There are 6 rings in the input file.
 3. There is one polyhedron consisting of 6 rings whose IDs are {0,1,2,3,4,5}.
