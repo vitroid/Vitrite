@@ -6,45 +6,7 @@
 import sys
 import networkx as nx
 import logging
-
-i=1
-MAXFRAGSIZE = 20
-while i < len(sys.argv):
-    arg = sys.argv[i]
-    if arg == "-x":
-        i+=1
-        MAXRINGSIZE = int(sys.argv[i])
-    elif arg == "-l":
-        i += 1
-        MAXFRAGSIZE = int(sys.argv[i])
-    elif arg == "-d":
-        logging.basicConfig(level=logging.DEBUG)
-    elif arg == "-n":
-        NOCHECKCOMPO = 1
-    i+=1
-
-#my @PLACED;
-#my @RINGSINTHEPOLY;
-#my @NUMRINGSATTHENODE;
-#my $NPOLY=0;
-#my $NUMNODES;
-#my %EDGES;
-#my $ORIGINALCOMPO;
-#
-#When $RSET is non-zero, fragments are output in @RSET format.
-#(@RSET is the format for set of rings.)
-#
-#my $RSET = 1;
-#
-#When $NGPH is non-zero, fragments are output in @NGPH format.
-#
-#my $NGPH = 0;
-
-#
-#list rings having the specified 3 successive nodes (center, left, and right)
-#
-
-
+from collections import defaultdict
 
 
 #reorder the ring noders so as to start from the first node
@@ -125,27 +87,19 @@ def Edges(nodes):
 
 
 #Look up all the polyhedral fragments (vitrites) in the given set of rings.
-def Polyhed(_rings):
+def Polyhed(_rings, nnode, maxfragsize=20):
     #Local functions
 
     def RegisterTriplets(nodes,ringid):
         for triplet in Triplets(nodes):
-            if triplet not in _RingsAtATriplet:
-                _RingsAtATriplet[triplet] = []
             _RingsAtATriplet[triplet].append(ringid)
             tr = tuple(reversed(triplet))
-            if tr not in _RingsAtATriplet:
-                _RingsAtATriplet[tr] = []
             _RingsAtATriplet[tr].append(ringid)
 
     def RegisterEdges(nodes,ringid):
         for edge in Edges(nodes):
-            if edge not in _RingsAtAnEdge:
-                _RingsAtAnEdge[edge] = []
             _RingsAtAnEdge[edge].append(ringid)
             ed = tuple(reversed(edge))
-            if ed not in _RingsAtAnEdge:
-                _RingsAtAnEdge[ed] = []
             _RingsAtAnEdge[ed].append(ringid)
 
     def IsDivided(fragment):
@@ -186,7 +140,7 @@ def Polyhed(_rings):
     def Progress(origin, peri, fragment, numRingsOnTheNode):
         #Here we define a "face" as a ring belonging to the (growing) polyhedron.
         logging.debug("#{0} {1}".format(peri,fragment))
-        if len(fragment) > MAXFRAGSIZE:
+        if len(fragment) > maxfragsize:
             #logging.debug("#LIMITTER")
             return False
         #if the perimeter closes,
@@ -252,8 +206,8 @@ def Polyhed(_rings):
         logging.debug("#Failed to expand perimeter {0} {1}".format(peri,fragment))
         return False
 
-    _RingsAtATriplet = dict()
-    _RingsAtAnEdge = dict()
+    _RingsAtATriplet = defaultdict(list)
+    _RingsAtAnEdge = defaultdict(list)
         
     for ringid, ring in enumerate(_rings):
         RegisterTriplets(ring,ringid)
@@ -300,22 +254,38 @@ def Polyhed(_rings):
     return _vitrites
 
 
-#file = open("q_400K_10GPa_v000.delaunay.tetra.adj.rngs")
-#file = open("mux121.delaunay.tetra.adj.rngs")
-file = sys.stdin
-while True:
-    line = file.readline()
-    if len(line) == 0:
-        break
-    columns = line.split()
-    if len(columns):
-        if columns[0] == "@RNGS":
-            nnode, Rings = LoadRNGS(file)
-            vitrites = Polyhed(Rings)
-            print("@FSEP")
-            print("@RSET")
-            print(len(Rings))
-            for vitrite in vitrites:
-                print(" ".join([str(i) for i in [len(vitrite)]+sorted(vitrite)]))
-            print(0) #terminator
+def main():
+    i=1
+    MAXFRAGSIZE = 20
+    while i < len(sys.argv):
+        arg = sys.argv[i]
+        if arg == "-l":
+            i += 1
+            MAXFRAGSIZE = int(sys.argv[i])
+        elif arg == "-d":
+            logging.basicConfig(level=logging.DEBUG)
+        elif arg == "-n":
+            NOCHECKCOMPO = 1
+        i+=1
+    #file = open("q_400K_10GPa_v000.delaunay.tetra.adj.rngs")
+    #file = open("mux121.delaunay.tetra.adj.rngs")
+    file = sys.stdin
+    while True:
+        line = file.readline()
+        if len(line) == 0:
+            break
+        columns = line.split()
+        if len(columns):
+            if columns[0] == "@RNGS":
+                nnode, Rings = LoadRNGS(file)
+                vitrites = Polyhed(Rings, nnode, maxfragsize=MAXFRAGSIZE)
+                print("@FSEP")
+                print("@RSET")
+                print(len(Rings))
+                for vitrite in vitrites:
+                    print(" ".join([str(i) for i in [len(vitrite)]+sorted(vitrite)]))
+                print(0) #terminator
+
+if __name__ == "__main__":
+    main()
 
