@@ -255,9 +255,9 @@ def Polyhed(_rings):
     _RingsAtATriplet = dict()
     _RingsAtAnEdge = dict()
         
-    for ringid in range(len(_rings)):
-        RegisterTriplets(_rings[ringid],ringid)
-        RegisterEdges(_rings[ringid],ringid)
+    for ringid, ring in enumerate(_rings):
+        RegisterTriplets(ring,ringid)
+        RegisterEdges(ring,ringid)
     #For counting the number of components separated by a polyhedral fragment
     _G = nx.Graph()
 
